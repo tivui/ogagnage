@@ -12,7 +12,7 @@ def oiseaux():
     env=app.config['ENV']
     print(DATABASE_URL)
     type='oiseau'
-    liste_db=ogagnagedb.scan_type(type,env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type,app.config['ENV'],DATABASE_URL)
     titre='Oiseaux du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 
