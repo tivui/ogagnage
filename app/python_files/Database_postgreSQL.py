@@ -1,6 +1,7 @@
 import psycopg2
 import boto3
 from app.config import S3_BUCKET, S3_KEY, S3_SECRET
+from app.config import DATABASE_URL
 s3 = boto3.client('s3',
                     aws_access_key_id=S3_KEY,
                     aws_secret_access_key= S3_SECRET,
