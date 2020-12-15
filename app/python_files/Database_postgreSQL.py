@@ -67,14 +67,7 @@ class OGAGNAGEDB_POSTGRESQL():
         connection.close()
 
     def scan_type(self,type,envi,DATABASE_URL):
-        if envi == 'dev':
-            connection = psycopg2.connect(user="postgres",
-                                          password="Perlembourg49%%%",
-                                          host="127.0.0.1",
-                                          port="5432",
-                                          database="ogagnagedb")
-        elif envi == 'prod':
-            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+        connection = psycopg2.connect(user="fyuujerfzmpxgf",
                                           password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
