@@ -46,7 +46,7 @@ def valid_supp():
     reponse = request.form
     id_carte=reponse['id_carte']
     print(type(id_carte))
-    filename_to_delete=ogagnagedb.filename_to_delete(id_carte)
+    filename_to_delete=ogagnagedb.filename_to_delete(id_carte,env,DATABASE_URL)
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
     my_bucket.Object(filename_to_delete).delete()
