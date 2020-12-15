@@ -1,7 +1,7 @@
 import psycopg2
 import boto3
 from app.config import S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
-from app.config import DATABASE_URL
+from app.config import DATABASE_URL,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
 s3 = boto3.client('s3',
                     aws_access_key_id=AWS_ACCESS_KEY_ID,
                     aws_secret_access_key= AWS_SECRET_ACCESS_KEY,
@@ -67,7 +67,7 @@ class OGAGNAGEDB_POSTGRESQL():
                                           port="5432",
                                           database="dchmdui7vcgm07")
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM infodb WHERE type=%s",(type,))
+        cursor.execute("SELECT * FROM infodb WHERE type=%s ORDER BY name ASC",(type,))
         return cursor.fetchall()
 
     def scan_complet(self,env,DATABASE_URL):
