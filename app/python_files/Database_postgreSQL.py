@@ -11,14 +11,18 @@ s3 = boto3.client('s3',
 class OGAGNAGEDB_POSTGRESQL():
 
     def update_infos(self, reponse,env,DATABASE_URL):
-        if env == 'dev':
+        if app.config["ENV"] == 'dev':
             connection = psycopg2.connect(user="postgres",
                                       password="Perlembourg49%%%",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="ogagnagedb")
-        elif env == 'prod':
-            connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        elif app.config["ENV"] == 'prod':
+            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
         cursor = connection.cursor()
         if reponse['type']=='oiseau':
             new_infos = (reponse['type'], reponse['name'], reponse['taille'],reponse['nourriture'],reponse['infos'])
@@ -56,7 +60,11 @@ class OGAGNAGEDB_POSTGRESQL():
                                       port="5432",
                                       database="ogagnagedb")
         elif app.config["ENV"] == 'prod':
-            connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
         cursor = connection.cursor()
         cursor.execute( "SELECT MAX(Id) FROM infodb" )
         ligne_max = str(cursor.fetchone()[0])
@@ -77,39 +85,48 @@ class OGAGNAGEDB_POSTGRESQL():
         return cursor.fetchall()
 
     def scan_complet(self,env,DATABASE_URL):
-        if env == 'dev':
+        if app.config["ENV"] == 'dev':
             connection = psycopg2.connect(user="postgres",
                                           password="Perlembourg49%%%",
                                           host="127.0.0.1",
                                           port="5432",
                                           database="ogagnagedb")
-        elif env == 'prod':
-            connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        elif app.config["ENV"] == 'prod':
+            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM infodb")
         return cursor.fetchall()
 
     def delete_carte(self,id_carte,env,DATABASE_URL):
-        if env == 'dev':
+        if app.config["ENV"] == 'dev':
             connection = psycopg2.connect(user="postgres",
                                       password="Perlembourg49%%%",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="ogagnagedb")
+        elif app.config["ENV"] == 'prod':
         cursor = connection.cursor()
         cursor.execute("DELETE FROM infodb WHERE id=" + id_carte)
         connection.commit()
         connection.close()
 
     def filename_to_delete(self,id_carte,env,DATABASE_URL):
-        if env == 'dev':
+        if app.config["ENV"] == 'dev':
             connection = psycopg2.connect(user="postgres",
                                           password="Perlembourg49%%%",
                                           host="127.0.0.1",
                                           port="5432",
                                           database="ogagnagedb")
-        elif env == 'prod':
-            connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        elif app.config["ENV"] == 'prod':
+            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM infodb WHERE id=" + id_carte)
         return cursor.fetchone()[3]
