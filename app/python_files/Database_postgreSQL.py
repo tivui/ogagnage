@@ -27,7 +27,7 @@ class OGAGNAGEDB_POSTGRESQL():
             cursor.execute(
                 "INSERT INTO infodb (type,name,taille,nourriture,infos) VALUES(%s,%s,%s,%s,%s)",
                 new_infos)
-        elif reponse['type']=='fleurs':
+        elif reponse['type']=='fleur':
             new_infos = (reponse['type'], reponse['name'], reponse['exposition'],reponse['floraison'],reponse['infos'])
             cursor.execute(
                 "INSERT INTO infodb (type,name,exposition,floraison,infos) VALUES(%s,%s,%s,%s,%s)",
@@ -37,7 +37,7 @@ class OGAGNAGEDB_POSTGRESQL():
             cursor.execute(
                 "INSERT INTO infodb (type,name,feuillage,nb,fruit,infos) VALUES(%s,%s,%s,%s,%s,%s)",
                 new_infos)
-        elif reponse['type']=='arbute':
+        elif reponse['type']=='arbuste':
             new_infos = (reponse['type'], reponse['name'], reponse['feuillage'],reponse['nb'],reponse['infos'])
             cursor.execute(
                 "INSERT INTO infodb (type,name,feuillage,nb,infos) VALUES(%s,%s,%s,%s,%s)",

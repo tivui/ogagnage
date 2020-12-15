@@ -87,7 +87,7 @@
                                            <b>Feuillage: </b> {{value[11]}}<br>
                                          {% endif %}
                                          {% if value[5]!=None %}
-                                           <b>Bon à savoir: </b> {{value[5]}}<br>
+                                         {% if value[1]=="fleur" %}<b>L'anecdote de Françoise:</b> <i>"{{value[5]}}"</i>{% else %}<b>Bon à savoir: </b> {{value[5]}}<br>{% endif %}
                                          {% endif %}
                                      </p>
                                      <br>
