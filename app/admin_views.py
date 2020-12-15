@@ -3,10 +3,10 @@ from flask import request,render_template, redirect,flash
 from app.python_files.Moderation import requires_auth
 from flask_login import login_user, login_required, logout_user
 import boto3
-from app.config import S3_BUCKET, S3_KEY, S3_SECRET, DATABASE_URL
+from app.config import S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, DATABASE_URL
 s3 = boto3.client('s3',
-                    aws_access_key_id=S3_KEY,
-                    aws_secret_access_key= S3_SECRET,
+                    aws_access_key_id=AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key= AWS_SECRET_ACCESS_KEY,
                      )
 
 @app.route('/admin/form')
