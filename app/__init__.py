@@ -8,7 +8,7 @@ import psycopg2
 app = Flask(__name__)
 
 db = SQLAlchemy(app)
-
+SQLALCHEMY_DATABASE_URI = "postgres://fyuujerfzmpxgf:76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e@ec2-54-75-246-118.eu-west-1.compute.amazonaws.com:5432/dchmdui7vcgm07"
 app.config["UPLOAD_FOLDER"] = "C:/Users/Asus/Documents/Formations/Python/ogagnage/app/static/img/"
 app.config["SECRET_KEY"] = "Perlembourg49%%%"
 if app.config["ENV"]=='prod':
