@@ -74,7 +74,11 @@ class OGAGNAGEDB_POSTGRESQL():
                                           port="5432",
                                           database="ogagnagedb")
         elif envi == 'prod':
-            connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+            connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM infodb WHERE type=%s",(type,))
         return cursor.fetchall()
