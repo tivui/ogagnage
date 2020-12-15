@@ -49,13 +49,13 @@ class OGAGNAGEDB_POSTGRESQL():
         connection.close()
 
     def update_filepath (self,filename,env,DATABASE_URL):
-        if env == 'dev':
+        if app.config["ENV"] == 'dev':
             connection = psycopg2.connect(user="postgres",
                                       password="Perlembourg49%%%",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="ogagnagedb")
-        elif env == 'prod':
+        elif app.config["ENV"] == 'prod':
             connection = psycopg2.connect(DATABASE_URL, sslmode='require')
         cursor = connection.cursor()
         cursor.execute( "SELECT MAX(Id) FROM infodb" )
