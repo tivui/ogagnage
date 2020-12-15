@@ -1,0 +1,238 @@
+{% extends "public/templates/ogagnage_templates.html" %}
+
+{% block title %}
+Formulaire d'ajout
+{% endblock %}
+
+{% block style %}
+.container {
+    width:80%;
+}
+.jumbotron {
+  position: relative;
+  background:none;
+  color: white;
+}
+.jumbotron:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+  background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity : 0.2;
+    z-index: -1;
+}
+.container-white {
+    background-color: white;
+    width:50%;
+    min-width:500px;
+    border-radius:10px;
+    margin-top:20px;
+    padding-bottom:20px;
+    opacity: 0.9;
+}
+
+{% endblock %}
+
+{% block contenu %}
+<center>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Ajout d'une nouvelle carte</h1>
+          <p class="lead"><span  style="color:dark-blue"><b>Choisir la catégorie:</b></span></p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary"  onclick="Screen_Oiseaux()">Oiseaux</button>
+              <button type="button" class="btn btn-secondary"  onclick="Screen_Mammiferes()">Mammifères</button>
+              <button type="button" class="btn btn-secondary"  onclick="Screen_Fleurs()">Fleurs</button>
+              <button type="button" class="btn btn-secondary"  onclick="Screen_Arbres()">Arbres</button>
+              <button type="button" class="btn btn-secondary"  onclick="Screen_Arbustes()">Arbustes</button>
+              <a role="button" class="btn btn-secondary" href="/admin/supp"><i class="fa fa-trash-alt"></i></a>
+          </div>
+      </div>
+    </div>
+</center>
+
+<div id="oiseaux" class="container-fluid container-white" style="display:none">
+<form action="/validation" method="post">
+          <br>
+          <input id="type" name="type" value="oiseau" style="display:none">
+          <div class="form-group">
+            <label for="name">Nom de l'oiseau</label>
+            <input class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="taille">Taille adulte (en cm)</label>
+            <input class="form-control" style="width:100px;" id="taille" name="taille" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="nourriture">Régime alimentaire</label>
+            <input class="form-control" id="nourriture" name="nourriture" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="infos">Description</label>
+            <textarea class="form-control" id="infos" name="infos" rows="3" required></textarea>
+          </div>
+    <br>
+          <button type="submit" class="btn btn-primary">Enregistrer les infos</button>
+</form>
+</div>
+
+<div id="mammiferes" class="container-fluid container-white" style="display:none">
+<form action="/validation" method="post">
+          <br>
+          <input id="type" name="type" value="mammifere" style="display:none">
+          <div class="form-group">
+            <label for="name">Nom de l'animal</label>
+            <input class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="taille">Taille adulte (en cm)</label>
+            <input class="form-control" style="width:100px;" id="taille" name="taille" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="nourriture">Régime alimentaire</label>
+            <input class="form-control" id="nourriture" name="nourriture" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="infos">Description</label>
+            <textarea class="form-control" id="infos" name="infos" rows="3" required></textarea>
+          </div>
+    <br>
+          <button type="submit" class="btn btn-primary">Enregistrer les infos</button>
+</form>
+</div>
+
+<div id="fleurs" class="container-fluid container-white" style="display:none">
+<form action="/validation" method="post">
+          <br>
+          <input id="type" name="type" value="fleur" style="display:none">
+          <div class="form-group">
+            <label for="name">Nom de la variété de fleur</label>
+            <input class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+          </div>
+			<div class="form-group">
+				<label for="exposition">Exposition</label>
+				<select class="form-select" style="width:150px;"  name="exposition" id="exposition" required>
+					<option value="soleil">ensoleillée</option>
+					<option value="ombre">ombragée</option>
+					<option value="soleil_ombre">mi-ombre</option>
+				</select>
+			</div>
+          <div class="form-group">
+            <label for="floraison">Période de floraison</label>
+            <input class="form-control" id="floraison" name="floraison" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="infos">Description</label>
+            <textarea class="form-control" id="infos" name="infos" rows="3" required></textarea>
+          </div>
+    <br>
+          <button type="submit" class="btn btn-primary">Enregistrer les infos</button>
+</form>
+</div>
+
+<div id="arbres" class="container-fluid container-white" style="display:none">
+<form action="/validation" method="post">
+          <br>
+          <input id="type" name="type" value="arbre" style="display:none">
+          <div class="form-group">
+            <label for="name">Nom de l'espèce d'arbre</label>
+            <input class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+          </div>
+			<div class="form-group">
+				<label for="feuillage">Feuillage</label>
+				<select class="form-select" style="width:150px;"  name="feuillage" id="feuillage" required>
+					<option value="soleil">Persistant</option>
+					<option value="ombre">Caduque</option>
+				</select>
+			</div>
+          <div class="form-group">
+            <label for="nb">Nombre de spécimens au Gagnage</label>
+            <input class="form-control" style="width:100px;" id="nb" name="nb"  required>
+          </div>
+          <div class="form-group">
+            <label for="fruit">Nom du fruit</label>
+            <input class="form-control" style="width:200px;" id="fruit" name="fruit"  required>
+          </div>
+          <div class="form-group">
+            <label for="infos">Description</label>
+            <textarea class="form-control" id="infos" name="infos" rows="3" required></textarea>
+          </div>
+    <br>
+          <button type="submit" class="btn btn-primary">Enregistrer les infos</button>
+</form>
+</div>
+
+<div id="arbustes" class="container-fluid container-white" style="display:none">
+<form action="/validation" method="post">
+          <br>
+          <input id="type" name="type" value="arbuste" style="display:none">
+          <div class="form-group">
+            <label for="name">Nom de l'espèce d'arbuste</label>
+            <input class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+          </div>
+			<div class="form-group">
+				<label for="feuillage">Feuillage</label>
+				<select class="form-select" style="width:150px;"  name="feuillage" id="feuillage" required>
+					<option value="soleil">Persistant</option>
+					<option value="ombre">Caduque</option>
+				</select>
+			</div>
+          <div class="form-group">
+            <label for="nb">Nombre de spécimens au Gagnage</label>
+            <input class="form-control" style="width:100px;" id="nb" name="nb"  required>
+          </div>
+          <div class="form-group">
+            <label for="infos">Description</label>
+            <textarea class="form-control" id="infos" name="infos" rows="3" required></textarea>
+          </div>
+    <br>
+          <button type="submit" class="btn btn-primary">Enregistrer les infos</button>
+</form>
+</div>
+
+<script>
+    function Screen_Oiseaux() {
+        document.getElementById('oiseaux').style.display='block';
+        document.getElementById('mammiferes').style.display='none';
+        document.getElementById('fleurs').style.display='none';
+        document.getElementById('arbres').style.display='none';
+        document.getElementById('arbustes').style.display='none';
+        }
+    function Screen_Mammiferes() {
+        document.getElementById('oiseaux').style.display='none';
+        document.getElementById('mammiferes').style.display='block';
+        document.getElementById('fleurs').style.display='none';
+        document.getElementById('arbres').style.display='none';
+        document.getElementById('arbustes').style.display='none';
+        }
+    function Screen_Fleurs() {
+        document.getElementById('oiseaux').style.display='none';
+        document.getElementById('mammiferes').style.display='none';
+        document.getElementById('fleurs').style.display='block';
+        document.getElementById('arbres').style.display='none';
+        document.getElementById('arbustes').style.display='none';
+        }
+    function Screen_Arbres() {
+        document.getElementById('oiseaux').style.display='none';
+        document.getElementById('mammiferes').style.display='none';
+        document.getElementById('fleurs').style.display='none';
+        document.getElementById('arbres').style.display='block';
+        document.getElementById('arbustes').style.display='none';
+        }
+    function Screen_Arbustes() {
+        document.getElementById('oiseaux').style.display='none';
+        document.getElementById('mammiferes').style.display='none';
+        document.getElementById('fleurs').style.display='none';
+        document.getElementById('arbres').style.display='none';
+        document.getElementById('arbustes').style.display='block';
+        }
+
+</script>
+{% endblock %}

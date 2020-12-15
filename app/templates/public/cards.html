@@ -1,0 +1,107 @@
+{% extends "public/templates/ogagnage_templates.html" %}
+
+{% block title %}
+{{titre}}
+{% endblock %}
+
+{% block style %}
+.container {
+    width:80%;
+}
+.album {
+    margin-top:20px;
+    opacity:0.9;
+    width:80%;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+.card {
+}
+.jumbotron {
+  position: relative;
+  background:none;
+  color: white;
+}
+.jumbotron:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("{{ url_for('static',filename='img/landscape.jpg') }}");
+    background-repeat: no-repeat;
+    background-position: center;
+  background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity : 0.2;
+    z-index: -1;
+}
+
+
+{% endblock %}
+
+{% block contenu %}
+<center>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">{{titre}}</h1>
+      </div>
+    </div>
+</center>
+
+
+<center><div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for value in liste_db %}
+          {% if value[3] %}
+          <div class="col-md-4 col-sm-6">
+              <div class="card mb-4 shadow-sm" style="opacity:100">
+                  <center>
+                      <br>
+                      <h5><b>{{value[2]}}</b></h5>
+                      <img src="https://ogagnage.s3.eu-west-3.amazonaws.com/{{value[3]}}"  class="img-thumbnail" width="100%"  alt="Logo catégorie">
+                               <div class="card-body justify-content-center d-flex flex-column">
+                                 <center>
+                                     <p class="card-text">
+                                         {% if value[4]!=None %}
+                                           <b>Régime alimentaire: </b> {{value[4]}}<br>
+                                         {% endif %}
+                                         {% if value[6]!=None %}
+                                           <b>Fruit: </b> {{value[6]}}<br>
+                                         {% endif %}
+                                         {% if value[7]!=None %}
+                                           <b>Nombre au Gagnage: </b> {{value[7]}}<br>
+                                         {% endif %}
+                                         {% if value[8]!=None %}
+                                           <b>Taille: </b> {{value[8]}} cm<br>
+                                         {% endif %}
+                                         {% if value[9]!=None %}
+                                           <b>Période de floraison: </b> {{value[9]}}<br>
+                                         {% endif %}
+                                         {% if value[10]!=None %}
+                                           <b>Exposition: </b> {{value[10]}}<br>
+                                         {% endif %}
+                                         {% if value[11]!=None %}
+                                           <b>Feuillage: </b> {{value[11]}}<br>
+                                         {% endif %}
+                                         {% if value[5]!=None %}
+                                           <b>Bon à savoir: </b> {{value[5]}}<br>
+                                         {% endif %}
+                                     </p>
+                                     <br>
+                                 </center>
+                               </div>
+                  </center>
+              </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+      </div>
+    </div>
+</div>
+</center>
+
+
+{% endblock %}
