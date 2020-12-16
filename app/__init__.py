@@ -3,10 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from app.python_files.Database_postgreSQL import OGAGNAGEDB_POSTGRESQL
 import os
 from app.config import SQLALCHEMY_DATABASE_URI
+from flask_sslify import SSLify
+if 'DYNO' in os.environ:  # only trigger SSLify if the app is running on Heroku
+    sslify = SSLify(app)
 
 import psycopg2
 
-app = Flask(__name__)
+app = Flask(__name__,instance_relative_config=True,static_url_path='')
 
 db = SQLAlchemy(app)
 app.config[ "SQLALCHEMY_DATABASE_URI"] = "postgres://fyuujerfzmpxgf:76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e@ec2-54-75-246-118.eu-west-1.compute.amazonaws.com:5432/dchmdui7vcgm07"
