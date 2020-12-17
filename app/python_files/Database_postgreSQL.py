@@ -47,7 +47,7 @@ class OGAGNAGEDB_POSTGRESQL():
 
     def update_filepath (self,filename):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                          password=https://github.com/tivui/ogagnage.git,
+                                          password=DATABASE_PASSWORD,
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
                                           database="dchmdui7vcgm07")
