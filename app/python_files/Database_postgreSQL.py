@@ -1,6 +1,5 @@
 import psycopg2
 import boto3
-from app.config import S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 from app.config import DATABASE_URL,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
 s3 = boto3.client('s3',
                     aws_access_key_id=AWS_ACCESS_KEY_ID,
@@ -8,9 +7,10 @@ s3 = boto3.client('s3',
                      )
 from flask import current_app
 
+
 class OGAGNAGEDB_POSTGRESQL():
 
-    def update_infos(self, reponse,env,DATABASE_URL):
+    def update_infos(self, reponse):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
                                           password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
@@ -45,7 +45,7 @@ class OGAGNAGEDB_POSTGRESQL():
         connection.commit()
         connection.close()
 
-    def update_filepath (self,filename,env,DATABASE_URL):
+    def update_filepath (self,filename):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
                                           password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
@@ -60,7 +60,7 @@ class OGAGNAGEDB_POSTGRESQL():
         connection.commit()
         connection.close()
 
-    def scan_type(self,type,envi,DATABASE_URL):
+    def scan_type(self,type):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
                                           password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
@@ -70,21 +70,16 @@ class OGAGNAGEDB_POSTGRESQL():
         cursor.execute("SELECT * FROM infodb WHERE type=%s ORDER BY name ASC",(type,))
         return cursor.fetchall()
 
-    def scan_complet(self,env,DATABASE_URL):
-        if current_app.config["ENV"]=='prod':
-            print("production")
-            connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                              password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
-                                              host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
-                                              port="5432",
-                                              database="dchmdui7vcgm07")
-            cursor = connection.cursor()
-            cursor.execute("SELECT * FROM infodb")
-            return cursor.fetchall()
-        elif current_app.config["ENV"]=='dev':
-            print ("développement")
-        else :
-            print (current_app.config["ENV"])
+    def scan_complet(self):
+        print("coucou",current_app.config["ENV"])
+        connection = psycopg2.connect(user="fyuujerfzmpxgf",
+                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
+                                          port="5432",
+                                          database="dchmdui7vcgm07")
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM infodb ORDER BY name ASC")
+        return cursor.fetchall()
 
 
     def delete_carte(self,id_carte,env,DATABASE_URL):

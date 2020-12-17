@@ -10,10 +10,9 @@ def afficher_home():
 
 @app.route('/oiseaux')
 def oiseaux():
-    env=app.config['ENV']
     print(DATABASE_URL)
     type='oiseau'
-    liste_db=ogagnagedb.scan_type(type,app.config['ENV'],DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type)
     titre='Oiseaux du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 
@@ -21,7 +20,7 @@ def oiseaux():
 def mammiferes():
     env=app.config['ENV']
     type='mammifere'
-    liste_db=ogagnagedb.scan_type(type,env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type)
     titre='Mammifères du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 
@@ -29,7 +28,7 @@ def mammiferes():
 def fleurs():
     env=app.config['ENV']
     type='fleur'
-    liste_db=ogagnagedb.scan_type(type,env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type)
     titre='Fleurs du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 
@@ -37,7 +36,7 @@ def fleurs():
 def arbres():
     env=app.config['ENV']
     type='arbre'
-    liste_db=ogagnagedb.scan_type(type,env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type)
     titre='Arbres du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 
@@ -45,7 +44,7 @@ def arbres():
 def arbustes():
     env=app.config['ENV']
     type='arbuste'
-    liste_db=ogagnagedb.scan_type(type,env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_type(type)
     titre='Arbustes du Gagnage'
     return render_template("/public/cards.html",liste_db=liste_db,titre=titre)
 

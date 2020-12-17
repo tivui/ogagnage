@@ -35,8 +35,7 @@ def home_admin_ajouté():
 @app.route('/admin/supp')
 @requires_auth
 def supp_admin():
-    env=app.config['ENV']
-    liste_db=ogagnagedb.scan_complet(env,DATABASE_URL)
+    liste_db=ogagnagedb.scan_complet()
     return render_template("admin/supp.html",liste_db=liste_db)
 
 @app.route('/admin/valid_supp',methods=['POST', 'GET'])
@@ -46,12 +45,12 @@ def valid_supp():
     reponse = request.form
     id_carte=reponse['id_carte']
     print(type(id_carte))
-    filename_to_delete=ogagnagedb.filename_to_delete(id_carte,env,DATABASE_URL)
+    filename_to_delete=ogagnagedb.filename_to_delete(id_carte)
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
     my_bucket.Object(filename_to_delete).delete()
-    ogagnagedb.delete_carte(id_carte,env,DATABASE_URL)
-    liste_db=ogagnagedb.scan_complet(env,DATABASE_URL)
+    ogagnagedb.delete_carte(id_carte)
+    liste_db=ogagnagedb.scan_complet()
     return render_template("admin/supp.html",liste_db=liste_db)
 
 
