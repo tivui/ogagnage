@@ -1,8 +1,8 @@
 import os
 
 S3_LOCATION = 'http://your-amazon-site.amazonaws.com/'
-AWS_ACCESS_KEY_ID = "AKIAIPJRDJGSROH4X4DQ"
-AWS_SECRET_ACCESS_KEY = "vJLVnBaD/0lLzMxCYpyqGVTkcTYQEBWBcNUbk5bc"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 S3_BUCKET = "ogagnage"
 DATABASE_URL = "postgres://fyuujerfzmpxgf:76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e@ec2-54-75-246-118.eu-west-1.compute.amazonaws.com:5432/dchmdui7vcgm07"
 SQLALCHEMY_DATABASE_URI = "postgres://fyuujerfzmpxgf:76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e@ec2-54-75-246-118.eu-west-1.compute.amazonaws.com:5432/dchmdui7vcgm07"

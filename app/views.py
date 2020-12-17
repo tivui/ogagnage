@@ -5,6 +5,7 @@ from app.config import DATABASE_URL
 
 @app.route('/')
 def afficher_home():
+    print(app.config["ENV"])
     return render_template("/public/home.html")
 
 @app.route('/oiseaux')
