@@ -1,6 +1,6 @@
 import psycopg2
 import boto3
-from app.config import DATABASE_URL,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
+from app.config import DATABASE_URL,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,DATABASE_PASSWORD
 s3 = boto3.client('s3',
                     aws_access_key_id=AWS_ACCESS_KEY_ID,
                     aws_secret_access_key= AWS_SECRET_ACCESS_KEY,
@@ -47,7 +47,7 @@ class OGAGNAGEDB_POSTGRESQL():
 
     def update_filepath (self,filename):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          password=https://github.com/tivui/ogagnage.git,
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
                                           database="dchmdui7vcgm07")
@@ -62,7 +62,7 @@ class OGAGNAGEDB_POSTGRESQL():
 
     def scan_type(self,type):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          password=DATABASE_PASSWORD,
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
                                           database="dchmdui7vcgm07")
