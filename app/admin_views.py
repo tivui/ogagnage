@@ -16,17 +16,15 @@ def home_admin():
 
 @app.route('/validation', methods=['POST'])
 def afficher_form_2():
-    env=app.config['ENV']
     reponse = request.form
-    ogagnagedb.update_infos(reponse,env,DATABASE_URL)
+    ogagnagedb.update_infos(reponse)
     return render_template("admin/form_2.html")
 
 @app.route('/validation_2', methods=['POST', 'GET'])
 def home_admin_ajouté():
-    env=app.config['ENV']
     file = request.files['image']
     filename = file.filename
-    ogagnagedb.update_filepath(filename,env,DATABASE_URL)
+    ogagnagedb.update_filepath(filename)
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
     my_bucket.Object(filename).put(Body=file, ACL='public-read')
@@ -41,7 +39,6 @@ def supp_admin():
 @app.route('/admin/valid_supp',methods=['POST', 'GET'])
 @requires_auth
 def valid_supp():
-    env=app.config['ENV']
     reponse = request.form
     id_carte=reponse['id_carte']
     print(type(id_carte))
