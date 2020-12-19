@@ -3,6 +3,10 @@ from flask import request,render_template, redirect,flash
 from flask_login import login_user, login_required, logout_user
 from app.config import DATABASE_URL
 
+@app.route('/service-worker.js')
+def sw():
+    return app.send_static_file('sw.js')
+
 @app.route('/')
 def afficher_home():
     return render_template("/public/home.html")
