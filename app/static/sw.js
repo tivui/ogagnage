@@ -1,51 +1,48 @@
-self.addEventListener("install", function(event) {
-  event.waitUntil(preLoad());
-});
+console.log('Hello from sw.js');
 
-var preLoad = function(){
-  console.log("Installing web app");
-  return caches.open("offline").then(function(cache) {
-    console.log("caching index and important routes");
-    return cache.addAll(["/blog/", "/blog", "/", "/contact", "/resume", "/offline.html"]);
-  });
-};
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js');
 
-self.addEventListener("fetch", function(event) {
-  event.respondWith(checkResponse(event.request).catch(function() {
-    return returnFromCache(event.request);
-  }));
-  event.waitUntil(addToCache(event.request));
-});
+if (workbox) {
+  console.log("Yay! Workbox is loaded 🎉");
 
-var checkResponse = function(request){
-  return new Promise(function(fulfill, reject) {
-    fetch(request).then(function(response){
-      if(response.status !== 404) {
-        fulfill(response);
-      } else {
-        reject();
-      }
-    }, reject);
-  });
-};
+  workbox.precaching.precacheAndRoute([
+    {
+      "url": "/",
+      "revision": "1"
+    }
+  ]);
 
-var addToCache = function(request){
-  return caches.open("offline").then(function (cache) {
-    return fetch(request).then(function (response) {
-      console.log(response.url + " was cached");
-      return cache.put(request, response);
-    });
-  });
-};
+  workbox.routing.registerRoute(
+    /\.(?:js|css)$/,
+    workbox.strategies.staleWhileRevalidate({
+      cacheName: 'static-resources',
+    }),
+  );
 
-var returnFromCache = function(request){
-  return caches.open("offline").then(function (cache) {
-    return cache.match(request).then(function (matching) {
-     if(!matching || matching.status == 404) {
-       return cache.match("offline.html");
-     } else {
-       return matching;
-     }
-    });
-  });
-};
+  workbox.routing.registerRoute(
+    /\.(?:png|gif|jpg|jpeg|svg)$/,
+    workbox.strategies.cacheFirst({
+      cacheName: 'images',
+      plugins: [
+        new workbox.expiration.Plugin({
+          maxEntries: 60,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        }),
+      ],
+    }),
+  );
+
+  workbox.routing.registerRoute(
+    new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'),
+    workbox.strategies.cacheFirst({
+      cacheName: 'googleapis',
+      plugins: [
+        new workbox.expiration.Plugin({
+          maxEntries: 30,
+        }),
+      ],
+    }),
+  );
+} else {
+  console.log("Boo! Workbox didn't load 😬");
+}
