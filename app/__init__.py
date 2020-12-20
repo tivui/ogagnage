@@ -6,7 +6,11 @@ from app.config import SQLALCHEMY_DATABASE_URI, DATABASE_URL
 
 import psycopg2
 
-app = Flask(__name__)
+app = Flask(__name__,
+            instance_relative_config=True,
+            static_url_path=''
+            )
+
 db = SQLAlchemy()
 app.config["UPLOAD_FOLDER"] = "C:/Users/Asus/Documents/Formations/Python/ogagnage/app/static/img/"
 app.config["SECRET_KEY"] = "Perlembourg49%%%"
