@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from app.python_files.Database_postgreSQL import OGAGNAGEDB_POSTGRESQL
 import os
 from app.config import SQLALCHEMY_DATABASE_URI, DATABASE_URL
+from flask_sslify import SSLify
+
 
 import psycopg2
 

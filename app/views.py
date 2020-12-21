@@ -5,11 +5,11 @@ from app.config import DATABASE_URL
 
 @app.route('/sw.js')
 def sw():
-    return app.send_from_directory('static','sw.js')
+    return app.send_static_file('sw.js')
 
 @app.route('/manifest.json')
 def manifest():
-    return app.send_from_directory('static', 'manifest.json')
+    return app.send_static_file('manifest.json')
 
 @app.route('/')
 def afficher_home():
