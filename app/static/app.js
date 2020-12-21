@@ -30,6 +30,7 @@
       // hide our user interface that shows our A2HS button
       btnAdd.style.display = 'none';
       // Show the prompt
+      if(deferredPrompt !== undefined)  {
       deferredPrompt.prompt();
       // Wait for the user to respond to the prompt
       deferredPrompt.userChoice
@@ -41,4 +42,5 @@
           }
           deferredPrompt = null;
         });
+        }
     });
