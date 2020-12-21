@@ -11,6 +11,10 @@ def sw():
 def manifest():
     return app.send_static_file('manifest.json')
 
+@app.route('/app/static/app.js')
+def app_js():
+    return app.send_static_file('app.js')
+
 @app.route('/')
 def afficher_home():
     return render_template("/public/home.html")
