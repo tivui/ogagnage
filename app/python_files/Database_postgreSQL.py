@@ -83,7 +83,7 @@ class OGAGNAGEDB_POSTGRESQL():
 
     def delete_carte(self,id_carte):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                          password="5e16862d8b756e290b1546bb79d7f57f8f9eca9082e80362fcce6a5f0d0d6487",
+                                          password=DATABASE_PASSWORD,
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
                                           database="dchmdui7vcgm07")
@@ -94,7 +94,7 @@ class OGAGNAGEDB_POSTGRESQL():
 
     def filename_to_delete(self,id_carte):
         connection = psycopg2.connect(user="fyuujerfzmpxgf",
-                                          password="76e9998da230d3998b8cb4f145fbe10d326c77f252b47e5fbabb188f8aeb0f9e",
+                                          password=DATABASE_PASSWORD,
                                           host="ec2-54-75-246-118.eu-west-1.compute.amazonaws.com",
                                           port="5432",
                                           database="dchmdui7vcgm07")
